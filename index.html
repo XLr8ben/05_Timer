@@ -92,30 +92,50 @@
     </div>
 </body>
 <script>
-    let x=1;
-    let intervalID=null;
-    const text=document.querySelector("#timer")
+    let hours = 0;
+    let minutes = 0;
+    let seconds = 0;
+    let intervalID = null;
+    const text = document.querySelector("#timer");
 
-    document.querySelector("#start").addEventListener("click",function(){
-        intervalID=setInterval(function(){
-            text.innerHTML=x++;
-        },1000)
-        document.querySelector("h1").innerHTML="Timer Started"
-        // console.log(x)
+    document.querySelector("#start").addEventListener("click", function () {
+        intervalID = setInterval(function () {
+            seconds++;
+
+            if (seconds === 60) {
+                seconds = 0;
+                minutes++;
+            }
+
+            if (minutes === 60) {
+                minutes = 0;
+                hours++;
+            }
+
+            const formattedTime = pad(hours) + ":" + pad(minutes) + ":" + pad(seconds);
+            text.innerHTML = formattedTime;
+        }, 1000);
+        document.querySelector("h1").innerHTML = "Timer Started";
     });
-    
-    document.querySelector("#pause").addEventListener("click",function(){
-        clearInterval(intervalID)
-        document.querySelector("h1").innerHTML="Paused"
-    })
-    
-    document.querySelector("#reset").addEventListener("click",function(){
-        clearInterval(intervalID)
-        intervalID=null;
-        x=1;
-        text.innerHTML="0"
-        document.querySelector("h1").innerHTML=""        
-    })
+
+    document.querySelector("#pause").addEventListener("click", function () {
+        clearInterval(intervalID);
+        document.querySelector("h1").innerHTML = "Timer Paused";
+    });
+
+    document.querySelector("#reset").addEventListener("click", function () {
+        clearInterval(intervalID);
+        intervalID = null;
+        hours = 0;
+        minutes = 0;
+        seconds = 0;
+        text.innerHTML = "00:00:00";
+        document.querySelector("h1").innerHTML = "Timer Reset";
+    });
+
+    function pad(value) {
+        return value < 10 ? "0" + value : value;
+    }
 
 
 
