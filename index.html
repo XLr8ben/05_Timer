@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        body {
+          background-color: #212121;
+          color: #fff;
+        }
+        .center {
+          display: flex;
+          height: 100vh;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+        #timer {
+          font-size: 40px;
+          background-color: orange;
+          padding: 30px 200px;
+          margin-top: 10px;
+          border-radius: 10px;
+        }
+        button{
+          background-color: orange;
+          color: #ffffff;
+          width: 200px;
+          height: 60px;
+          border-radius: 10px;
+          font-size: 20px;
+          border-style: none;
+          margin-top: 5px;
+          display: inline-block;
+          margin: 12px;
+        }
+        span{
+            font-size: 50px;
+        }
+        h1{
+            font-size: 30px;
+        }
+        @media screen and (min-width: 600px) {
+    #timer {
+        padding: 30px 200px;
+    }
+
+    button {
+        color: white;
+        width: 200px;
+        height: 60px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    #timer {
+        padding: 30px 200px;
+    }
+
+    button {
+        color: white;
+        width: 200px;
+        height: 60px;
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #timer {
+        padding: 30px 200px;
+    }
+
+    button {
+        color:white;
+        width: 220px;
+        height: 70px;
+        font-size: 22px;
+    }
+}
+      </style>
+</head>
+<body>
+    <div class="center">
+        <div id="banner"><span>Timer</span></div>
+        <div id="timer">0</div>
+        <h1></h1>
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="reset">Reset</button>
+    </div>
+</body>
+<script>
+    let x=1;
+    let intervalID=null;
+    const text=document.querySelector("#timer")
+
+    document.querySelector("#start").addEventListener("click",function(){
+        intervalID=setInterval(function(){
+            text.innerHTML=x++;
+        },1000)
+        document.querySelector("h1").innerHTML="Timer Started"
+        // console.log(x)
+    });
+    
+    document.querySelector("#pause").addEventListener("click",function(){
+        clearInterval(intervalID)
+        document.querySelector("h1").innerHTML="Paused"
+    })
+    
+    document.querySelector("#reset").addEventListener("click",function(){
+        clearInterval(intervalID)
+        intervalID=null;
+        x=1;
+        text.innerHTML="0"
+        document.querySelector("h1").innerHTML=""        
+    })
+
+
+
+    // const sayDate = function(str){
+    //     console.log(str, Date.now());
+    // }
+
+    // const intervalId = setInterval(sayDate, 1000, "hi")
+
+    // clearInterval(intervalId)
+</script>
+</html>
